@@ -1,0 +1,232 @@
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+    padding: var(--spacing-md) 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-small);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-image {
+    height: 80px;
+    width: auto;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-xl);
+}
+
+.nav-links a {
+    color: var(--color-gray-light);
+    font-weight: var(--font-weight-medium);
+    transition: color var(--transition-fast);
+}
+
+.nav-links a:hover {
+    color: var(--color-gold);
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: var(--font-size-hero);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gold);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-xl);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.hero-image {
+    border-radius: var(--border-radius-large);
+    overflow: hidden;
+    box-shadow: var(--shadow-large);
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+}
+
+/* Projects Section */
+.projects {
+    padding: var(--spacing-3xl) 0;
+    background-color: var(--color-dark-bg);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: var(--spacing-3xl) 0;
+    background-color: var(--color-dark-secondary);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+/* Contact Section */
+.contact {
+    padding: var(--spacing-3xl) 0;
+    background-color: var(--color-dark-bg);
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-3xl);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.opening-hours {
+    display: flex;
+    flex-direction: column;
+}
+
+.hours-box {
+    background-color: var(--color-gold);
+    color: var(--color-dark-bg);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-large);
+    text-align: center;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-large);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--color-dark-secondary);
+    padding: var(--spacing-xl) 0;
+    border-top: 1px solid var(--color-gray-dark);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-logo .logo-image {
+    height: 100px;
+    width: auto;
+}
+
+.footer-social p {
+    color: var(--color-gold);
+    margin-bottom: var(--spacing-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    :root {
+        --font-size-hero: 2.5rem;
+        --font-size-h2: 1.75rem;
+    }
+
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --font-size-hero: 2rem;
+        --font-size-h2: 1.5rem;
+    }
+
+    .navbar .container {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .logo-image {
+        height: 60px;
+    }
+
+    .nav-links {
+        gap: var(--spacing-md);
+        font-size: 0.875rem;
+    }
+
+    .hero {
+        padding-top: 120px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .projects-grid,
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --font-size-hero: 1.75rem;
+        --spacing-lg: 1rem;
+    }
+
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+}
