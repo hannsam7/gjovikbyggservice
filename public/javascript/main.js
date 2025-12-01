@@ -9,15 +9,23 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
+            const navbar = document.querySelector('.navbar');
+            const navbarHeight = navbar ? navbar.offsetHeight : 0;
+            const extra = 16; // small spacing
+
+            if (targetId === '#projects') {
+                const title = document.querySelector('#projects .section-title');
+                const el = title || targetSection;
+                if (el) {
+                    const top = window.scrollY + el.getBoundingClientRect().top - navbarHeight - extra;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+                return;
+            }
             
             if (targetSection) {
-                const navbarHeight = document.querySelector('.navbar').offsetHeight;
-                const targetPosition = targetSection.offsetTop - navbarHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+                const top = window.scrollY + targetSection.getBoundingClientRect().top - navbarHeight - extra;
+                window.scrollTo({ top, behavior: 'smooth' });
             }
         });
     });
@@ -48,17 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', highlightNavigation);
     highlightNavigation(); // Call once on load
 
-    // Navbar background on scroll
-    const navbar = document.querySelector('.navbar');
-    
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            navbar.style.backgroundColor = 'rgba(26, 26, 26, 0.98)';
-        } else {
-            navbar.style.backgroundColor = 'rgba(26, 26, 26, 0.95)';
-        }
-    });
-
     // Fade-in animation on scroll
     const observerOptions = {
         threshold: 0.1,
@@ -75,11 +72,143 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
 
     // Observe project cards and testimonial cards
-    const cards = document.querySelectorAll('.project-card, .testimonial-card');
-    cards.forEach(card => {
+    const fadeCards = document.querySelectorAll('.project-card, .testimonial-card');
+    fadeCards.forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(card);
     });
+
+    // Limit "Beskriv prosjekt" by max words with live counter (strict)
+    const descEl = document.querySelector('#contactForm textarea#description');
+    if (descEl) {
+        const maxWords = parseInt(descEl.dataset.maxWords || '100', 10);
+        const counter = document.getElementById('descriptionHelp');
+        const warnAt = Math.floor(maxWords * 0.8);
+
+        const tokens = (text) => text.trim().split(/\s+/).filter(Boolean);
+        const countWords = (text) => tokens(text).length;
+        const firstWords = (text, n) => tokens(text).slice(0, n).join(' ');
+
+        const updateCounter = () => {
+            const words = countWords(descEl.value);
+            if (!counter) return;
+            counter.textContent = `${words}/${maxWords} ord`;
+            counter.classList.toggle('warn', words >= warnAt && words <= maxWords);
+            counter.classList.toggle('exceeded', words > maxWords);
+        };
+
+        // Prevent typing beyond limit
+        descEl.addEventListener('beforeinput', (e) => {
+            const isInsert = e.inputType && e.inputType.startsWith('insert');
+            if (!isInsert) return;
+
+            // ignore paste/drop here; handled by 'paste'
+            if (!e.data) return;
+
+            const start = descEl.selectionStart;
+            const end = descEl.selectionEnd;
+            const nextValue = descEl.value.slice(0, start) + e.data + descEl.value.slice(end);
+
+            if (countWords(nextValue) > maxWords) {
+                e.preventDefault();
+            }
+        });
+
+        // Enforce after input (fallback + IME safety)
+        descEl.addEventListener('input', () => {
+            if (countWords(descEl.value) > maxWords) {
+                descEl.value = firstWords(descEl.value, maxWords);
+                descEl.setSelectionRange(descEl.value.length, descEl.value.length);
+            }
+            updateCounter();
+        });
+
+        // Smart paste: only paste allowed words
+        descEl.addEventListener('paste', (e) => {
+            e.preventDefault();
+            const paste = (e.clipboardData || window.clipboardData).getData('text') || '';
+            const start = descEl.selectionStart;
+            const end = descEl.selectionEnd;
+
+            const before = descEl.value.slice(0, start);
+            const after = descEl.value.slice(end);
+
+            // words that will remain outside the selection
+            const beforeCount = countWords(before);
+            const afterCount = countWords(after);
+            const allowedForPaste = Math.max(0, maxWords - (beforeCount + afterCount));
+
+            const pasteTrimmed = firstWords(paste, allowedForPaste);
+            const next = `${before} ${pasteTrimmed} ${after}`.trim().replace(/\s+/g, ' ');
+
+            descEl.value = next;
+            // place caret right after the pasted content
+            const caret = (`${before} ${pasteTrimmed}`).trim().replace(/\s+/g, ' ').length;
+            descEl.setSelectionRange(caret, caret);
+            updateCounter();
+        });
+
+        descEl.addEventListener('compositionend', () => {
+            if (countWords(descEl.value) > maxWords) {
+                descEl.value = firstWords(descEl.value, maxWords);
+            }
+            updateCounter();
+        });
+
+        updateCounter();
+    }
+
+    // Projects carousel: page-based scrolling (no extra click at the end)
+    const projectsCarousel = document.querySelector('.projects-carousel');
+    if (projectsCarousel) {
+        const wrapper = projectsCarousel.querySelector('.carousel-track-wrapper');
+        const scroller = projectsCarousel.querySelector('.carousel-track');
+        const prev = projectsCarousel.querySelector('.carousel-btn.prev');
+        const next = projectsCarousel.querySelector('.carousel-btn.next');
+        const slides = Array.from(scroller.querySelectorAll('.project-card'));
+
+        if (slides.length) {
+            const getGap = () => {
+                const cs = getComputedStyle(scroller);
+                return parseFloat(cs.columnGap || cs.gap || 0) || 0;
+            };
+            const getCardWidth = () => slides[0].getBoundingClientRect().width;
+            const getPerView = () => Math.max(1, Math.round((wrapper.clientWidth + getGap()) / (getCardWidth() + getGap())));
+            const getStep = () => getPerView() * (getCardWidth() + getGap());
+
+            const getTotalPages = () => Math.max(0, Math.ceil(slides.length / getPerView()) - 1);
+            const getCurrentPage = () => Math.round(scroller.scrollLeft / getStep());
+            const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
+
+            function goToPage(p) {
+                const total = getTotalPages();
+                const target = clamp(p, 0, total);
+                scroller.scrollTo({ left: target * getStep(), behavior: 'smooth' });
+            }
+
+            function updateButtons() {
+                const p = getCurrentPage();
+                const total = getTotalPages();
+                if (prev) prev.disabled = p <= 0;
+                if (next) next.disabled = p >= total;
+            }
+
+            if (prev) prev.addEventListener('click', () => goToPage(getCurrentPage() - 1));
+            if (next) next.addEventListener('click', () => goToPage(getCurrentPage() + 1));
+
+            scroller.addEventListener('scroll', () => {
+                clearTimeout(scroller._btnTimer);
+                scroller._btnTimer = setTimeout(updateButtons, 100);
+            });
+
+            window.addEventListener('resize', () => {
+                goToPage(getCurrentPage());
+                updateButtons();
+            });
+
+            updateButtons();
+        }
+    }
 });

@@ -2,11 +2,11 @@
 :root {
     /* Colors */
     --color-dark-bg: #242825;
-    --color-dark-secondary: #2a2a2a;
-    --color-gold: #DCAB4E;
-    --color-gold-hover: #c49563;
+    --color-gold: #C89A2E; /* darker gold for better contrast */
+    --color-gold-hover: #A57F25;
+    --color-gray-light: #f0f0f0; /* brighter for text on dark bg */
+    --color-dark-secondary: #262626;
     --color-white: #ffffff;
-    --color-gray-light: #e5e5e5;
     --color-gray-medium: #8a8a8a;
     --color-gray-dark: #4a4a4a;
 
