@@ -42,115 +42,106 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Add styles
         const style = document.createElement('style');
-        style.textContent = `
-            .lightbox {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                z-index: 9999;
-            }
-            .lightbox.active {
-                display: block;
-            }
-            .lightbox-overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: rgba(0, 0, 0, 0.95);
-            }
-            .lightbox-content {
-                position: relative;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                padding: 2rem;
-            }
-            .lightbox-image {
-                max-width: 90%;
-                max-height: 80vh;
-                object-fit: contain;
-                border-radius: 8px;
-            }
-            .lightbox-close,
-            .lightbox-prev,
-            .lightbox-next {
-                position: absolute;
-                background-color: rgba(212, 165, 116, 0.9);
-                color: #1a1a1a;
-                border: none;
-                font-size: 2rem;
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.3s ease;
-                z-index: 10000;
-            }
-            .lightbox-close:hover,
-            .lightbox-prev:hover,
-            .lightbox-next:hover {
-                background-color: #d4a574;
-                transform: scale(1.1);
-            }
-            .lightbox-close {
-                top: 20px;
-                right: 20px;
-                font-size: 2.5rem;
-                line-height: 1;
-            }
-            .lightbox-prev {
-                left: 20px;
-                top: 50%;
-                transform: translateY(-50%);
-            }
-            .lightbox-next {
-                right: 20px;
-                top: 50%;
-                transform: translateY(-50%);
-            }
-            .lightbox-prev:hover {
-                transform: translateY(-50%) scale(1.1);
-            }
-            .lightbox-next:hover {
-                transform: translateY(-50%) scale(1.1);
-            }
-            .lightbox-info {
-                margin-top: 1.5rem;
-                text-align: center;
-                color: white;
-            }
-            .lightbox-title {
-                color: #d4a574;
-                font-size: 1.5rem;
-                margin-bottom: 0.5rem;
-            }
-            .lightbox-location {
-                color: #8a8a8a;
-            }
-            @media (max-width: 768px) {
-                .lightbox-close,
-                .lightbox-prev,
-                .lightbox-next {
-                    width: 40px;
-                    height: 40px;
-                    font-size: 1.5rem;
-                }
-                .lightbox-image {
-                    max-width: 95%;
-                    max-height: 70vh;
-                }
-            }
-        `;
+      style.textContent = `
+      .lightbox {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 9999;
+      }
+      .lightbox.active { display: block; }
+      .lightbox-overlay {
+          position: absolute;
+          inset: 0;
+          background-color: rgba(0, 0, 0, 0.95);
+      }
+      .lightbox-content {
+          position: relative;             /* ensure absolute children overlay correctly */
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          padding: 2rem;
+      }
+      .lightbox-image {
+          max-width: 90%;
+          max-height: 80vh;
+          object-fit: contain;
+          border-radius: 8px;
+          z-index: 1;                     /* below buttons */
+      }
+      .lightbox-close,
+      .lightbox-prev,
+      .lightbox-next {
+          position: absolute;
+          background-color: rgba(212, 165, 116, 0.9);
+          color: #1a1a1a;
+          border: none;
+          font-size: 2rem;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+          z-index: 2;                    /* above image */
+          box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+      }
+      .lightbox-close:hover,
+      .lightbox-prev:hover,
+      .lightbox-next:hover {
+          background-color: #d4a574;
+          transform: scale(1.1);
+      }
+      .lightbox-close {
+          top: 20px;
+          right: 20px;
+          font-size: 2.5rem;
+          line-height: 1;
+      }
+      .lightbox-prev,
+      .lightbox-next {
+          top: 50%;                      /* center vertically over the image */
+          transform: translateY(-50%);
+      }
+      .lightbox-prev { left: 20px; }
+      .lightbox-next { right: 20px; }
+
+      .lightbox-info {
+          margin-top: 1.5rem;
+          text-align: center;
+          color: white;
+          z-index: 1;
+      }
+      .lightbox-title {
+          color: #d4a574;
+          font-size: 1.5rem;
+          margin-bottom: 0.5rem;
+      }
+      .lightbox-location { color: #8a8a8a; }
+
+      @media (max-width: 768px) {
+          .lightbox-close,
+          .lightbox-prev,
+          .lightbox-next {
+              width: 40px;
+              height: 40px;
+              font-size: 1.5rem;
+          }
+          .lightbox-image {
+              max-width: 95%;
+              max-height: 70vh;
+          }
+          .lightbox-prev { left: 8px; }
+          .lightbox-next { right: 8px; }
+      }
+  `;
         document.head.appendChild(style);
 
         // Event listeners
