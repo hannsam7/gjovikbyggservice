@@ -160,55 +160,168 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCounter();
     }
 
-    // Projects carousel: page-based scrolling (no extra click at the end)
+    // Projects carousel: improved mobile-friendly version
     const projectsCarousel = document.querySelector('.projects-carousel');
     if (projectsCarousel) {
         const wrapper = projectsCarousel.querySelector('.carousel-track-wrapper');
         const scroller = projectsCarousel.querySelector('.carousel-track');
         const prev = projectsCarousel.querySelector('.carousel-btn.prev');
         const next = projectsCarousel.querySelector('.carousel-btn.next');
+        
+        // Mobile buttons
+        const mobileControls = document.querySelector('.carousel-controls-mobile');
+        const prevMobile = mobileControls?.querySelector('.carousel-btn-mobile.prev');
+        const nextMobile = mobileControls?.querySelector('.carousel-btn-mobile.next');
+        
         const slides = Array.from(scroller.querySelectorAll('.project-card'));
 
         if (slides.length) {
+            let isScrolling = false;
+            let touchStartX = 0;
+            let touchEndX = 0;
+
             const getGap = () => {
                 const cs = getComputedStyle(scroller);
                 return parseFloat(cs.columnGap || cs.gap || 0) || 0;
             };
-            const getCardWidth = () => slides[0].getBoundingClientRect().width;
-            const getPerView = () => Math.max(1, Math.round((wrapper.clientWidth + getGap()) / (getCardWidth() + getGap())));
+            
+            const getCardWidth = () => {
+                if (slides.length === 0) return 0;
+                return slides[0].getBoundingClientRect().width;
+            };
+            
+            const getPerView = () => {
+                const wrapperWidth = wrapper.clientWidth;
+                const cardWidth = getCardWidth();
+                const gap = getGap();
+                if (cardWidth === 0) return 1;
+                return Math.max(1, Math.round((wrapperWidth + gap) / (cardWidth + gap)));
+            };
+            
             const getStep = () => getPerView() * (getCardWidth() + getGap());
 
             const getTotalPages = () => Math.max(0, Math.ceil(slides.length / getPerView()) - 1);
-            const getCurrentPage = () => Math.round(scroller.scrollLeft / getStep());
+            
+            const getCurrentPage = () => {
+                const step = getStep();
+                if (step === 0) return 0;
+                return Math.round(scroller.scrollLeft / step);
+            };
+            
             const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
 
             function goToPage(p) {
+                if (isScrolling) return;
+                
                 const total = getTotalPages();
                 const target = clamp(p, 0, total);
-                scroller.scrollTo({ left: target * getStep(), behavior: 'smooth' });
+                const scrollTarget = target * getStep();
+                
+                isScrolling = true;
+                scroller.scrollTo({ left: scrollTarget, behavior: 'smooth' });
+                
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 500);
             }
 
             function updateButtons() {
                 const p = getCurrentPage();
                 const total = getTotalPages();
+                
+                // Update desktop buttons
                 if (prev) prev.disabled = p <= 0;
                 if (next) next.disabled = p >= total;
+                
+                // Update mobile buttons
+                if (prevMobile) prevMobile.disabled = p <= 0;
+                if (nextMobile) nextMobile.disabled = p >= total;
             }
 
-            if (prev) prev.addEventListener('click', () => goToPage(getCurrentPage() - 1));
-            if (next) next.addEventListener('click', () => goToPage(getCurrentPage() + 1));
+            // Desktop button navigation
+            if (prev) {
+                prev.addEventListener('click', () => {
+                    goToPage(getCurrentPage() - 1);
+                });
+            }
+            
+            if (next) {
+                next.addEventListener('click', () => {
+                    goToPage(getCurrentPage() + 1);
+                });
+            }
+            
+            // Mobile button navigation
+            if (prevMobile) {
+                prevMobile.addEventListener('click', () => {
+                    goToPage(getCurrentPage() - 1);
+                });
+            }
+            
+            if (nextMobile) {
+                nextMobile.addEventListener('click', () => {
+                    goToPage(getCurrentPage() + 1);
+                });
+            }
 
+            // Touch swipe support for mobile
+            scroller.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            scroller.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        // Swiped left - go to next
+                        goToPage(getCurrentPage() + 1);
+                    } else {
+                        // Swiped right - go to previous
+                        goToPage(getCurrentPage() - 1);
+                    }
+                }
+            }
+
+            // Update buttons on scroll
+            let scrollTimeout;
             scroller.addEventListener('scroll', () => {
-                clearTimeout(scroller._btnTimer);
-                scroller._btnTimer = setTimeout(updateButtons, 100);
-            });
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(updateButtons, 150);
+            }, { passive: true });
 
+            // Update on window resize
+            let resizeTimeout;
             window.addEventListener('resize', () => {
-                goToPage(getCurrentPage());
-                updateButtons();
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    goToPage(getCurrentPage());
+                    updateButtons();
+                }, 250);
             });
 
+            // Initial update
             updateButtons();
+
+            // Prevent horizontal scroll from affecting body
+            scroller.addEventListener('touchmove', (e) => {
+                e.stopPropagation();
+            }, { passive: true });
         }
     }
+
+    // Prevent body scroll when touching carousel on mobile
+    document.body.addEventListener('touchmove', (e) => {
+        const carousel = e.target.closest('.carousel-track');
+        if (!carousel) return;
+        
+        // Allow carousel to scroll, prevent body scroll
+        e.preventDefault();
+    }, { passive: false });
 });

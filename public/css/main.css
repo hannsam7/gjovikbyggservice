@@ -36,6 +36,7 @@ html, body {
 .logo-image {
     height: 115px;
     width: auto;
+    max-width: 100%;
 }
 
 .nav-links {
@@ -60,7 +61,7 @@ html, body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 80px;
+    padding-top: 140px;
 }
 
 .hero-content {
@@ -82,7 +83,7 @@ html, body {
     justify-content: center;
     gap: 0.5rem;
     padding: 0.8rem 1.25rem;
-    border-radius: 9999px; /* fully rounded */
+    border-radius: 9999px;
     border: 2px solid transparent;
     font-weight: var(--font-weight-semibold);
     letter-spacing: 0.2px;
@@ -110,7 +111,7 @@ html, body {
 /* Solid gold button with dark green text */
 .btn-primary {
     background: var(--color-gold);
-    color: var(--color-dark-bg); /* site dark green */
+    color: var(--color-dark-bg);
     border-color: var(--color-gold);
 }
 .btn-primary:hover {
@@ -143,11 +144,13 @@ html, body {
     border-radius: 25px 0px 0px 25px;
     overflow: hidden;
     box-shadow: var(--shadow-large);
+    max-width: 100%;
 }
 
 .hero-image img {
     width: 100%;
     height: auto;
+    display: block;
 }
 
 /* Projects Section */
@@ -156,31 +159,38 @@ html, body {
     background-color: var(--color-dark-bg);
 }
 
+.projects .container {
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+/* Hide mobile controls on desktop */
+.carousel-controls-mobile {
+    display: none;
+}
+
 /* Projects carousel */
 .projects-carousel {
-    display: grid;
-    grid-template-columns: auto 1fr auto; /* left btn, track, right btn */
-    align-items: center;
-    gap: var(--spacing-md);
+    position: relative;
+    max-width: 100%;
 }
 
 .projects-carousel .carousel-track-wrapper {
-    grid-column: 2;
-    grid-row: 1;
     min-width: 0;
+    overflow: hidden;
 }
 
 .carousel-track {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: calc((100% - var(--spacing-xl)) / 2); /* 2 cards per view */
+    grid-auto-columns: calc((100% - var(--spacing-xl)) / 2);
     gap: var(--spacing-xl);
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    padding-bottom: 4px; /* avoid cutting box shadow */
+    padding-bottom: 4px;
 }
 
 .carousel-track::-webkit-scrollbar {
@@ -189,28 +199,30 @@ html, body {
 
 .project-card {
     scroll-snap-align: start;
+    min-width: 0;
 }
 
 /* Base image size */
 .project-card .project-image {
     width: 100%;
-    height: 280px;
+    height: 400px;
     border-radius: var(--border-radius);
     overflow: hidden;
     background: #1f1f1f;
 }
+
 .project-card .project-image img, .hero-image img {
     max-width: 100%;
-    height: auto;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     display: block;
 }
 
 /* Make the last 4 cards (square images) larger */
 .carousel-track .project-card:nth-last-child(-n+4) .project-image {
-    height: 360px;
+    height: 450px;
 }
-
 
 .projects .section-title {
     text-align: center;
@@ -219,8 +231,10 @@ html, body {
 }
 
 .carousel-btn {
-    position: static;
-    z-index: 1;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
     background: var(--color-gold);
     color: var(--color-dark-bg);
     border-radius: 999px;
@@ -231,18 +245,25 @@ html, body {
     font-size: 1.6rem;
     box-shadow: var(--shadow-small);
     transition: transform var(--transition-fast), background var(--transition-fast), opacity var(--transition-fast);
-    align-self: center;
-    grid-row: 1; /* force same row as track */
+    flex-shrink: 0;
 }
-.carousel-btn.prev { grid-column: 1; }
-.carousel-btn.next { grid-column: 3; }
 
-.carousel-btn:hover { background: var(--color-gold-hover); transform: scale(1.05); }
-.carousel-btn:disabled { opacity: 0.4; pointer-events: none; }
+.carousel-btn.prev { 
+    left: -60px;
+}
 
-/* Make the last 4 cards (square images) larger */
-.carousel-track .project-card:nth-last-child(-n+4) .project-image {
-    height: 360px;
+.carousel-btn.next { 
+    right: -60px;
+}
+
+.carousel-btn:hover { 
+    background: var(--color-gold-hover); 
+    transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-btn:disabled { 
+    opacity: 0.4; 
+    pointer-events: none; 
 }
 
 /* Testimonials Section */
@@ -265,14 +286,14 @@ html, body {
 
 .contact-content {
     display: grid;
-    grid-template-columns: 3fr 1fr; /* make form area wider */
+    grid-template-columns: 3fr 1fr;
     gap: var(--spacing-3xl);
 }
 
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md); /* spacing between fields */
+    gap: var(--spacing-md);
 }
 
 .contact-form label {
@@ -284,12 +305,13 @@ html, body {
 .contact-form select,
 .contact-form textarea {
     max-width: 100%;
+    width: 100%;
     background-color: var(--color-dark-secondary);
     color: var(--color-white);
     border: 1px solid var(--color-gray-dark);
     border-radius: var(--border-radius-large);
-    padding: 0.9rem 1rem;              /* bigger controls */
-    font-size: var(--font-size-large);  /* bigger text */
+    padding: 0.9rem 1rem;
+    font-size: var(--font-size-large);
 }
 
 .contact-form input:focus,
@@ -345,18 +367,19 @@ html, body {
 }
 
 .contact-form textarea {
-    min-height: 200px; /* larger textarea */
+    min-height: 200px;
+    resize: vertical;
 }
 
 .field-help {
     margin-top: 0.5rem;
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* counter aligned right above textarea */
+    justify-content: flex-start;
     gap: var(--spacing-md);
 }
 
-/* Submit button (bigger than word-count) */
+/* Submit button */
 .contact-form .btn-submit {
     font-size: 1.25rem;
     padding: 0.7rem 1.1rem;
@@ -368,7 +391,7 @@ html, body {
 .form-actions {
     margin-top: 0.75rem;
     display: flex;
-    justify-content: flex;
+    justify-content: flex-start;
 }
 
 .word-count {
@@ -392,13 +415,13 @@ html, body {
 
 .word-count.exceeded {
     background: rgba(220, 0, 0, 0.18);
-  border-color: #B00020;  /* darker red */
-  color: #B00020;
+    border-color: #B00020;
+    color: #B00020;
     font-weight: var(--font-weight-semibold);
 }
 
 .hero .hero-buttons .btn {
-    padding: 0.6rem 0.9rem; /* was 0.8rem 1.25rem */
+    padding: 0.6rem 0.9rem;
 }
 
 .opening-hours {
@@ -413,11 +436,13 @@ html, body {
     margin: 0;
     padding: 0;
 }
+
 .opening-hours-list dt {
     float: left;
     font-weight: var(--font-weight-semibold);
     color: var(--color-dark-bg);
 }
+
 .opening-hours-list dd {
     margin: 0 0 0 90px;
     color: var(--color-dark-bg);
@@ -450,6 +475,7 @@ html, body {
 .footer-logo .logo-image {
     height: 120px;
     width: auto;
+    max-width: 100%;
 }
 
 .footer-address h3,
@@ -503,10 +529,54 @@ html, body {
         grid-template-columns: 1fr;
         gap: var(--spacing-xl);
     }
+    
+    .hero-text {
+        padding-left: var(--spacing-lg);
+        font-size: 1.2em;
+    }
+    
+    .hero-text h1 {
+        margin-left: 0;
+    }
+    
+    .hero-buttons {
+        margin-left: 0;
+    }
+    
+    .hero-image {
+        border-radius: var(--border-radius-large);
+    }
 
     .contact-content {
-        grid-template-columns: 1fr; /* keep good layout on tablets/mobile */
+        grid-template-columns: 1fr;
         gap: var(--spacing-xl);
+    }
+    
+    .projects .container {
+        padding-left: 70px;
+        padding-right: 70px;
+    }
+    
+    .carousel-track {
+        grid-auto-columns: calc((100% - var(--spacing-md)) / 1.5);
+    }
+    
+    /* Adjust carousel image sizes for tablet */
+    .project-card .project-image {
+        height: 350px;
+    }
+    
+    .carousel-track .project-card:nth-last-child(-n+4) .project-image {
+        height: 400px;
+    }
+    
+    /* Adjust button position for tablets */
+    .carousel-btn.prev { 
+        left: -50px;
+    }
+
+    .carousel-btn.next { 
+        right: -50px;
     }
 }
 
@@ -514,20 +584,16 @@ html, body {
     :root {
         --font-size-hero: 2rem;
         --font-size-h2: 1.5rem;
+        --spacing-xl: 2rem;
+        --spacing-3xl: 3rem;
     }
 
     .navbar .container {
         flex-direction: column;
-        gap: var(--spacing-md);
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm) var(--spacing-md);
     }
 
-    .nav-links {
-        gap: var(--spacing-sm);
-        flex-wrap: wrap;
-    }
-    .nav-links a {
-        font-size: 1rem;
-    }
     .logo-image {
         max-width: 100%;
         height: 60px;
@@ -536,19 +602,52 @@ html, body {
     .nav-links {
         gap: var(--spacing-md);
         font-size: 0.875rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-links a {
+        font-size: 1rem;
+        padding: 0.25rem 0.5rem;
     }
 
     .hero {
-        padding-top: 120px;
+        padding-top: 180px;
+        min-height: auto;
+        padding-bottom: var(--spacing-xl);
+    }
+    
+    .hero-text {
+        padding-left: 0;
+        font-size: 1em;
     }
 
     .hero-buttons {
         flex-direction: column;
+        width: 100%;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
     }
 
-    .projects-grid,
+    .projects,
+    .testimonials,
+    .contact {
+        padding: var(--spacing-xl) 0;
+    }
+    
+    .projects .container {
+        padding-left: var(--spacing-lg);
+        padding-right: var(--spacing-lg);
+    }
+
     .testimonials-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-md);
     }
 
     .footer-content {
@@ -566,27 +665,148 @@ html, body {
         justify-content: center;
     }
 
+    /* Mobile carousel improvements */
     .projects-carousel {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-sm);
+        display: block;
     }
-    .carousel-btn.prev,
-    .carousel-btn.next {
-        grid-column: 1;
-        grid-row: auto;
-        margin: 0 auto;
+    
+    /* Hide desktop carousel buttons on mobile */
+    .projects-carousel .carousel-btn {
+        display: none;
     }
+    
+    .carousel-track-wrapper {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    /* Show mobile button controls */
+    .carousel-controls-mobile {
+        display: flex !important;
+        justify-content: center;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-md);
+    }
+    
+    .carousel-btn-mobile {
+        background: var(--color-gold);
+        color: var(--color-dark-bg);
+        border-radius: 999px;
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        font-size: 1.4rem;
+        box-shadow: var(--shadow-small);
+        transition: transform var(--transition-fast), background var(--transition-fast), opacity var(--transition-fast);
+        cursor: pointer;
+        border: none;
+    }
+    
+    .carousel-btn-mobile:hover {
+        background: var(--color-gold-hover);
+        transform: scale(1.05);
+    }
+    
+    .carousel-btn-mobile:disabled {
+        opacity: 0.4;
+        pointer-events: none;
+    }
+    
     .carousel-track {
-        grid-auto-columns: 100%;
+        grid-auto-columns: 85%;
+        gap: var(--spacing-md);
+    }
+    
+    .project-card .project-image {
+        height: 240px;
+    }
+    
+    .carousel-track .project-card:nth-last-child(-n+4) .project-image {
+        height: 280px;
+    }
+    
+    /* Form improvements for mobile */
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 0.75rem 0.875rem;
+    }
+    
+    .contact-form .btn-submit {
+        font-size: 1.1rem;
+        padding: 0.875rem 1.25rem;
+        width: 100%;
+    }
+    
+    .opening-hours-list dd {
+        margin-left: 80px;
     }
 }
+
 @media (max-width: 480px) {
     :root {
         --font-size-hero: 1.75rem;
+        --font-size-h2: 1.25rem;
         --spacing-lg: 1rem;
+        --spacing-xl: 1.5rem;
+        --spacing-3xl: 2rem;
     }
 
     .container {
         padding: 0 var(--spacing-md);
     }
+    
+    .projects .container {
+        padding-left: var(--spacing-md);
+        padding-right: var(--spacing-md);
+    }
+    
+    .hero-text h1 {
+        font-size: 1.5rem;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .carousel-track {
+        grid-auto-columns: 90%;
+    }
+    
+    .project-card .project-image {
+        height: 200px;
+    }
+    
+    .carousel-track .project-card:nth-last-child(-n+4) .project-image {
+        height: 240px;
+    }
+    
+    .opening-hours-list dd {
+        margin-left: 70px;
+        font-size: 0.9rem;
+    }
+    
+    .opening-hours-list dt {
+        font-size: 0.9rem;
+    }
+    
+    .hours-box {
+        padding: var(--spacing-md);
+        font-size: 1rem;
+    }
+}
+
+/* Additional overflow prevention */
+* {
+    max-width: 100%;
+}
+
+img {
+    height: auto;
+}
+
+.container {
+    overflow-x: hidden;
 }

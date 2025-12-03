@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
           background-color: rgba(0, 0, 0, 0.95);
       }
       .lightbox-content {
-          position: relative;             /* ensure absolute children overlay correctly */
+          position: relative;
           height: 100%;
           display: flex;
           align-items: center;
@@ -72,14 +72,14 @@ document.addEventListener('DOMContentLoaded', function() {
           max-height: 80vh;
           object-fit: contain;
           border-radius: 8px;
-          z-index: 1;                     /* below buttons */
+          z-index: 1;
       }
       .lightbox-close,
       .lightbox-prev,
       .lightbox-next {
-          position: absolute;
-          background-color: rgba(212, 165, 116, 0.9);
-          color: #1a1a1a;
+          position: fixed;
+          background-color: rgba(200, 154, 46, 0.9);
+          color: #242825;
           border: none;
           font-size: 2rem;
           width: 50px;
@@ -90,13 +90,13 @@ document.addEventListener('DOMContentLoaded', function() {
           align-items: center;
           justify-content: center;
           transition: all 0.3s ease;
-          z-index: 2;                    /* above image */
+          z-index: 10000;
           box-shadow: 0 4px 16px rgba(0,0,0,0.35);
       }
       .lightbox-close:hover,
       .lightbox-prev:hover,
       .lightbox-next:hover {
-          background-color: #d4a574;
+          background-color: #C89A2E;
           transform: scale(1.1);
       }
       .lightbox-close {
@@ -107,11 +107,16 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       .lightbox-prev,
       .lightbox-next {
-          top: 50%;                      /* center vertically over the image */
+          top: 50%;
           transform: translateY(-50%);
       }
       .lightbox-prev { left: 20px; }
       .lightbox-next { right: 20px; }
+
+      .lightbox-prev:hover,
+      .lightbox-next:hover {
+          transform: translateY(-50%) scale(1.1);
+      }
 
       .lightbox-info {
           margin-top: 1.5rem;
@@ -120,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
           z-index: 1;
       }
       .lightbox-title {
-          color: #d4a574;
+          color: #C89A2E;
           font-size: 1.5rem;
           margin-bottom: 0.5rem;
       }
@@ -140,6 +145,10 @@ document.addEventListener('DOMContentLoaded', function() {
           }
           .lightbox-prev { left: 8px; }
           .lightbox-next { right: 8px; }
+          .lightbox-prev:hover,
+          .lightbox-next:hover {
+              transform: translateY(-50%) scale(1.05);
+          }
       }
   `;
         document.head.appendChild(style);
