@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ];
 
       try {
-          const mailto = `mailto:hannasamb@gmail.com?subject=${
+          const mailto = `mailto:post@gjovik-byggservice.no?subject=${
               encodeURIComponent(subject)
           }&body=${
               encodeURIComponent(bodyLines.join('\n'))

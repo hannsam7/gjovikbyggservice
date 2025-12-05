@@ -72,7 +72,7 @@ html, body {
 
 .hero-content {
     display: grid;
-    grid-template-columns: 1fr 0.8fr;
+    grid-template-columns: 1fr 0.9fr;
     gap: var(--spacing-3xl);
     align-items: center;
     width: 100%;
@@ -154,11 +154,13 @@ html, body {
 }
 
 .hero-image {
-    border-radius: 25px 0 0 25px;
+    border-radius: 25px;
     overflow: hidden;
     box-shadow: var(--shadow-large);
     width: 100%;
-    margin-right: calc(-1 * var(--spacing-lg));
+    margin-left: auto;   /* push image to the right */
+    margin-right: 0;     /* ensure no auto-right */
+    justify-self: end;
 }
 
 .hero-image img {
