@@ -61,7 +61,7 @@ html, body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 140px;
+    padding-top: 110px;
 }
 
 .hero .container {
@@ -72,7 +72,7 @@ html, body {
 
 .hero-content {
     display: grid;
-    grid-template-columns: 1fr 0.9fr;
+    grid-template-columns: 1fr 1fr;
     gap: var(--spacing-3xl);
     align-items: center;
     width: 100%;
@@ -93,7 +93,7 @@ html, body {
     border-radius: 9999px;
     border: 2px solid transparent;
     font-weight: var(--font-weight-semibold);
-    letter-spacing: 0.2px;
+    letter-spacing: 0.3px;
     text-decoration: none;
     transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
 }
@@ -153,6 +153,20 @@ html, body {
     flex-wrap: wrap;
 }
 
+.hero-buttons .btn {
+    letter-spacing: 0.3px;
+}
+
+.hero-buttons .btn-primary {
+    /* make Kontakt primary: swap classes in HTML */
+    padding: 0.7rem 1.1rem;
+}
+
+.hero-buttons .btn-outline {
+    padding: 0.7rem 1.1rem;
+}
+
+
 .hero-image {
     border-radius: 25px;
     overflow: hidden;
@@ -161,6 +175,7 @@ html, body {
     margin-left: auto;   /* push image to the right */
     margin-right: 0;     /* ensure no auto-right */
     justify-self: end;
+    position: relative;
 }
 
 .hero-image img {
@@ -168,6 +183,24 @@ html, body {
     height: auto;
     display: block;
     object-fit: cover;
+}
+
+.hero-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(36,40,37,0.35) 0%, rgba(36,40,37,0) 40%);
+    pointer-events: none;
+}
+
+.section-title {
+    font-size: var(--font-size-h2);
+    margin: 0 auto var(--spacing-2xl);
+    text-align: center;
+}
+.hero-description {
+    max-width: 70ch; /* readable width */
+    line-height: 1.8; /* slightly more breathing room */
 }
 
 /* Projects Section */
@@ -179,6 +212,11 @@ html, body {
 .projects .container {
     padding-left: 80px;
     padding-right: 80px;
+    padding-bottom: calc(var(--spacing-xl) + 20px); /* more bottom space */
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-large);
+    overflow: hidden;
+    background: rgba(0,0,0,0.05);
 }
 
 /* Hide mobile controls on desktop */
@@ -215,18 +253,53 @@ html, body {
 }
 
 .project-card {
+    position: relative;
     scroll-snap-align: start;
     min-width: 0;
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    will-change: transform;
+}
+
+.project-image {
+    position: relative;
+}
+.project-image::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 35%;
+    background: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0));
+    pointer-events: none;
+}
+
+.project-info {
+    position: absolute;
+    bottom: 1.25rem; 
+    left: 0.75rem;
+    right: 0.75rem;
+    z-index: 2;
+}
+
+.project-title, .project-link {
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+}
+.project-link {
+    display: inline-block;
+    margin-top: 0.25rem;
+    color: var(--color-gold);
 }
 
 /* Base image size */
 .project-card .project-image {
+    position: relative; 
     width: 100%;
-    height: 400px;
+    height: 420px;
     border-radius: var(--border-radius);
     overflow: hidden;
     background: #1f1f1f;
 }
+
 
 .project-card .project-image img, .hero-image img {
     max-width: 100%;
@@ -238,7 +311,7 @@ html, body {
 
 /* Make the last 4 cards (square images) larger */
 .carousel-track .project-card:nth-last-child(-n+4) .project-image {
-    height: 450px;
+    height: 480px;
 }
 
 .projects .section-title {
@@ -621,6 +694,10 @@ html, body {
         --spacing-3xl: 3rem;
     }
 
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+
     .navbar .container {
         flex-direction: column;
         gap: var(--spacing-sm);
@@ -645,7 +722,7 @@ html, body {
     }
 
     .hero {
-        padding-top: 180px;
+        padding-top: 160px;
         min-height: auto;
         padding-bottom: var(--spacing-xl);
     }
@@ -691,6 +768,8 @@ html, body {
         font-size: 1rem;
     }
 
+    .hero-content { grid-template-columns: 1fr; }
+
     .projects,
     .testimonials,
     .contact {
@@ -700,8 +779,8 @@ html, body {
     .projects .container {
         padding-left: var(--spacing-lg);
         padding-right: var(--spacing-lg);
+        padding-bottom: calc(var(--spacing-lg) + 16px); 
     }
-
     .testimonials-grid {
         grid-template-columns: 1fr;
         gap: var(--spacing-md);
@@ -775,11 +854,11 @@ html, body {
     }
     
     .project-card .project-image {
-        height: 240px;
+        height: 260px;
     }
     
     .carousel-track .project-card:nth-last-child(-n+4) .project-image {
-        height: 280px;
+        height: 300px;
     }
     
     /* Form improvements for mobile */
