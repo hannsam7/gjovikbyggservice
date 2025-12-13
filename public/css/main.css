@@ -46,7 +46,7 @@ html, body {
 }
 
 .nav-links a {
-    color: #f0f0f0;
+    color: #ffffff;
     font-weight: var(--font-weight-medium);
     transition: color var(--transition-fast);
     font-size: 1.3em;
@@ -527,7 +527,7 @@ html, body {
 }
 
 .social-icons a {
-    color: #f0f0f0;
+    color: #ffffff;
     transition: color var(--transition-fast);
 }
 

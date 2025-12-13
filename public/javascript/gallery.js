@@ -1,6 +1,9 @@
 // Project gallery and lightbox functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const projectCards = document.querySelectorAll('.project-card');
+    const isMobile = window.matchMedia('(max-width: 480px)').matches;
+  if (isMobile) return;
+
+  const projectCards = document.querySelectorAll('.project-card');
     let currentImageIndex = 0;
     let galleryImages = [];
 

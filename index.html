@@ -3,9 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="max-age=31536000, immutable" />
     <title>Gjøvik ByggService - Vi hjelper deg med dine drømme prosjekt</title>
     <link rel="stylesheet" href="/public/css/variable.css" />
   <link rel="stylesheet" href="/public/css/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   </head>
   <body>
     <!-- Navigation -->
@@ -47,10 +50,10 @@
             </div>
           </div>
           <div class="hero-image">
-            <img
-              src="/public/images/home-image.jpeg"
-              alt="Construction project showcase"
-            />
+            <picture>
+              <source srcset="/public/images/home-image.webp" type="image/webp">
+              <img src="/public/images/home-image.jpeg" alt="Construction project showcase" width="1200" height="800" fetchpriority="high">
+            </picture>
           </div>
         </div>
       </div>
@@ -117,7 +120,7 @@
                 <div class="project-image">
                   <img
                     src="/public/images/house-image.JPG"
-                    alt="House renovation"
+                    alt="House renovation" loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -132,7 +135,7 @@
                 <div class="project-image">
                   <img
                     src="/public/images/bath-modern.JPG"
-                    alt="Bathroom renovation"
+                    alt="Bathroom renovation" loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -147,7 +150,7 @@
                 <div class="project-image">
                   <img
                     src="/public/images/bath-reno.JPG"
-                    alt="Bathroom renovation"
+                    alt="Bathroom renovation" loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -162,7 +165,7 @@
                 <div class="project-image">
                   <img
                     src="/public/images/roof.JPG"
-                    alt="Roof renovation"
+                    alt="Roof renovation" loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -177,7 +180,7 @@
                 <div class="project-image">
                   <img
                     src="/public/images/house-reno.JPG"
-                    alt="House renovation"
+                    alt="House renovation" loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -192,7 +195,7 @@
                 <div class="project-image">
                   <img
                     src="/public/images/kitchen-reno.JPG"
-                    alt="Kitchen renovation"
+                    alt="Kitchen renovation" loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -404,8 +407,8 @@
       </div>
     </footer>
 
-    <script src="public/javascript/main.js"></script>
-    <script src="public/javascript/gallery.js"></script>
-    <script src="public/javascript/forms.js"></script>
+    <script src="public/javascript/main.js" defer></script>
+    <script src="public/javascript/gallery.js" defer></script>
+    <script src="public/javascript/forms.js" defer></script>
   </body>
 </html>
