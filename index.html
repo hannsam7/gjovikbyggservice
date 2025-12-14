@@ -40,7 +40,15 @@
             class="logo-image"
           />
         </div>
-        <ul class="nav-links">
+        
+        <!-- Hamburger Menu Button (Mobile only) -->
+        <button class="hamburger" id="hamburger" aria-label="Meny">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
           <li><a href="#hero">Hjem</a></li>
           <li><a href="#projects">Prosjekter</a></li>
           <li><a href="#testimonials">Tilbakemeldinger</a></li>
@@ -48,6 +56,9 @@
         </ul>
       </div>
     </nav>
+
+    <!-- Navigation Overlay (Mobile only) -->
+    <div class="nav-overlay" id="navOverlay"></div>
 
     <!-- Hero Section -->
     <section id="hero" class="hero">
@@ -128,7 +139,7 @@
                 <div class="project-image">
                   <img
                     src="/public/images/hytte-image.png"
-                    alt="Hus renovasjon utført av Gjøvik ByggService"
+                    alt="Hytte renovasjon utført av Gjøvik ByggService"
                   />
                 </div>
                 <div class="project-info">
@@ -467,6 +478,7 @@
     </footer>
 
     <script src="public/javascript/main.js" defer></script>
+    <script src="public/javascript/navigation.js" defer></script>
     <script src="public/javascript/gallery.js" defer></script>
     <script src="public/javascript/forms.js" defer></script>
   </body>

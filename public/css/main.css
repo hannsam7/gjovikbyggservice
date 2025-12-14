@@ -19,7 +19,7 @@ html, body {
     top: 0;
     left: 0;
     right: 0;
-    background-color: rgba(36, 40, 37, 0.7);
+    background-color: rgba(36, 40, 37, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     padding: 0;
@@ -31,6 +31,7 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: var(--spacing-sm) var(--spacing-lg);
 }
 
 .logo-image {
@@ -54,6 +55,39 @@ html, body {
 
 .nav-links a:hover {
     color: var(--color-gold);
+}
+
+/* Hamburger menu (hidden on desktop) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: var(--color-gold);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
 }
 
 /* Hero Section */
@@ -699,77 +733,139 @@ html, body {
         padding: 0 var(--spacing-md);
     }
 
+    /* Mobile Navigation with Hamburger Menu */
     .navbar .container {
-        flex-direction: column;
-        gap: var(--spacing-sm);
-        padding: var(--spacing-sm) var(--spacing-md);
+        padding: 0.75rem 1rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .logo-image {
-        max-width: 100%;
-        height: 60px;
+        height: 50px;
+        width: auto;
     }
 
-    .nav-links {
-        gap: var(--spacing-md);
-        font-size: 0.875rem;
-        flex-wrap: wrap;
-        justify-content: center;
+    /* Show hamburger on mobile */
+    .hamburger {
+        display: flex;
     }
-    
+
+    /* Hide nav links by default on mobile */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70%;
+        max-width: 300px;
+        background-color: rgba(36, 40, 37, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        gap: 0;
+        padding: 80px 0 2rem 0;
+        transition: right 0.3s ease;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+        overflow-y: auto;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid rgba(200, 154, 46, 0.1);
+    }
+
     .nav-links a {
-        font-size: 1rem;
-        padding: 0.25rem 0.5rem;
+        display: block;
+        padding: 1.25rem 2rem;
+        font-size: 1.1rem;
+        width: 100%;
+        transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        background-color: rgba(200, 154, 46, 0.15);
+        padding-left: 2.5rem;
+    }
+
+    /* Overlay when menu is open */
+    .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        z-index: 999;
+    }
+
+    .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
     }
 
     .hero {
-        padding-top: 160px;
+        padding-top: 90px;
         min-height: auto;
-        padding-bottom: var(--spacing-xl);
+        padding-bottom: var(--spacing-2xl);
     }
     
     .hero .container {
         padding: 0 var(--spacing-lg);
     }
     
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
     .hero-text {
         padding-right: 0;
         font-size: 1em;
+        text-align: center;
     }
     
     .hero-text h1 {
         margin-left: 0;
+        font-size: 1.85rem;
+        line-height: 1.3;
+        margin-bottom: var(--spacing-md);
     }
     
     .hero-description {
         margin-left: 0;
-        font-size: 1rem;
+        font-size: 1.05rem;
         margin-bottom: var(--spacing-lg);
+        text-align: center;
+        line-height: 1.6;
+        max-width: 100%;
     }
 
     .hero-buttons {
         flex-direction: column;
         width: 100%;
         margin-left: 0;
+        gap: 0.75rem;
     }
     
+    /* Hide hero image on mobile for faster loading and better mobile experience */
     .hero-image {
-        border-radius: var(--border-radius-large);
-        margin-right: 0;
-    }
-    
-    .hero-image img {
-        height: auto;
+        display: none;
     }
     
     .hero-buttons .btn {
         width: 100%;
         justify-content: center;
-        padding: 0.75rem 1rem;
-        font-size: 1rem;
+        padding: 0.875rem 1.25rem;
+        font-size: 1.05rem;
     }
-
-    .hero-content { grid-template-columns: 1fr; }
 
     .projects,
     .testimonials,
@@ -782,6 +878,13 @@ html, body {
         padding-right: var(--spacing-lg);
         padding-bottom: calc(var(--spacing-lg) + 16px); 
     }
+
+    .projects .section-title {
+        font-size: 1.4rem;
+        padding: 0 var(--spacing-sm);
+        line-height: 1.3;
+    }
+    
     .testimonials-grid {
         grid-template-columns: 1fr;
         gap: var(--spacing-md);
@@ -828,11 +931,11 @@ html, body {
         background: var(--color-gold);
         color: var(--color-dark-bg);
         border-radius: 999px;
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
         display: grid;
         place-items: center;
-        font-size: 1.4rem;
+        font-size: 1.5rem;
         box-shadow: var(--shadow-small);
         transition: transform var(--transition-fast), background var(--transition-fast), opacity var(--transition-fast);
         cursor: pointer;
@@ -842,6 +945,10 @@ html, body {
     .carousel-btn-mobile:hover {
         background: var(--color-gold-hover);
         transform: scale(1.05);
+    }
+    
+    .carousel-btn-mobile:active {
+        transform: scale(0.95);
     }
     
     .carousel-btn-mobile:disabled {
@@ -855,11 +962,11 @@ html, body {
     }
     
     .project-card .project-image {
-        height: 260px;
+        height: 280px;
     }
     
     .carousel-track .project-card:nth-last-child(-n+4) .project-image {
-        height: 300px;
+        height: 320px;
     }
     
     /* Form improvements for mobile */
@@ -867,24 +974,24 @@ html, body {
     .contact-form select,
     .contact-form textarea {
         font-size: 16px; /* Prevents zoom on iOS */
-        padding: 0.75rem 0.875rem;
+        padding: 0.875rem 1rem;
     }
     
     .contact-form .btn-submit {
         font-size: 1.1rem;
-        padding: 0.875rem 1.25rem;
+        padding: 1rem 1.5rem;
         width: 100%;
     }
     
     .opening-hours-list dd {
-        margin-left: 80px;
+        margin-left: 85px;
     }
 }
 
 @media (max-width: 480px) {
     :root {
         --font-size-hero: 1.75rem;
-        --font-size-h2: 1.25rem;
+        --font-size-h2: 1.35rem;
         --spacing-lg: 1rem;
         --spacing-xl: 1.5rem;
         --spacing-3xl: 2rem;
@@ -893,45 +1000,85 @@ html, body {
     .container {
         padding: 0 var(--spacing-md);
     }
+
+    .navbar .container {
+        padding: 0.65rem 0.75rem;
+    }
+
+    .logo-image {
+        height: 45px;
+    }
     
     .projects .container {
         padding-left: var(--spacing-md);
         padding-right: var(--spacing-md);
     }
     
+    .hero {
+        padding-top: 80px;
+    }
+    
     .hero-text h1 {
         font-size: 1.5rem;
         margin-bottom: var(--spacing-md);
+        padding: 0 0.5rem;
+    }
+    
+    .hero-description {
+        font-size: 0.95rem;
+        padding: 0 0.5rem;
     }
     
     .section-title {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+        margin-bottom: var(--spacing-lg);
+        padding: 0 0.5rem;
+        word-wrap: break-word;
+        hyphens: auto;
     }
     
     .carousel-track {
-        grid-auto-columns: 90%;
+        grid-auto-columns: 92%;
+        gap: var(--spacing-sm);
     }
     
     .project-card .project-image {
-        height: 200px;
-    }
-    
-    .carousel-track .project-card:nth-last-child(-n+4) .project-image {
         height: 240px;
     }
     
+    .carousel-track .project-card:nth-last-child(-n+4) .project-image {
+        height: 280px;
+    }
+    
+    .carousel-btn-mobile {
+        width: 40px;
+        height: 40px;
+        font-size: 1.4rem;
+    }
+    
     .opening-hours-list dd {
-        margin-left: 70px;
-        font-size: 0.9rem;
+        margin-left: 75px;
+        font-size: 0.95rem;
     }
     
     .opening-hours-list dt {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
     
     .hours-box {
         padding: var(--spacing-md);
         font-size: 1rem;
+    }
+    
+    .testimonial-card {
+        padding: var(--spacing-md);
+    }
+    
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+        font-size: 16px;
+        padding: 0.75rem 0.875rem;
     }
 }
 
