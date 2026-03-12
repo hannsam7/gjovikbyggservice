@@ -3,31 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Cache-Control" content="max-age=31536000, immutable" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; 
-               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; 
-               font-src 'self' https://fonts.gstatic.com; 
-               img-src 'self' data:; 
-               script-src 'self';"
-    />
-    <!-- Prevent clickjacking -->
-    <meta http-equiv="X-Frame-Options" content="DENY" />
-
-    <!-- Prevent MIME type sniffing -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-
-    <!-- Enable XSS protection -->
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-
-    <!-- Referrer policy -->
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <title>Gjøvik ByggService - Vi hjelper deg med dine drømme prosjekt</title>
+    <meta name="description" content="Gjøvik ByggService – totalentreprenør i Gjøvik. Vi leverer kjøkkenrenovering, bad, tilbygg, tak og hytterenovering. Mesterbedrift og sentralt godkjent." />
+    <title>Gjøvik ByggService – Totalentreprenør i Gjøvik | Kjøkken, bad, tilbygg</title>
     <link rel="stylesheet" href="/public/css/variable.css" />
-    <link rel="stylesheet" href="/public/css/main.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="/public/css/main.css" />
   </head>
   <body>
     <!-- Navigation -->
@@ -40,61 +19,74 @@
             class="logo-image"
           />
         </div>
-        
-        <!-- Hamburger Menu Button (Mobile only) -->
-        <button class="hamburger" id="hamburger" aria-label="Meny">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        <ul class="nav-links" id="navLinks">
+        <ul class="nav-links">
           <li><a href="#hero">Hjem</a></li>
-          <li><a href="#projects">Prosjekter</a></li>
+          <li><a href="#services">Tjenester</a></li>
+          <li><a href="#projects">Prosjekt</a></li>
+          <li><a href="#about">Om oss</a></li>
           <li><a href="#testimonials">Tilbakemeldinger</a></li>
           <li><a href="#contact">Kontakt</a></li>
         </ul>
       </div>
     </nav>
 
-    <!-- Navigation Overlay (Mobile only) -->
-    <div class="nav-overlay" id="navOverlay"></div>
-
     <!-- Hero Section -->
     <section id="hero" class="hero">
       <div class="container">
         <div class="hero-content">
           <div class="hero-text">
-            <h1>Vi hjelper deg med dine drømme prosjekt</h1>
-
+            <h1>Vi hjelper deg med dine drømmeprosjekt</h1>
+            
             <!-- NEW: Company description -->
             <p class="hero-description">
-              Vi er en totalentreprenør som leverer komplette løsninger – fra
-              planlegging til ferdig resultat. Med alle faggrupper samlet under
-              ett tak får du trygg og effektiv gjennomføring av hele prosjektet.
+              Vi er en totalentreprenør som leverer komplette løsninger – 
+              fra planlegging til ferdig resultat. Med alle faggrupper samlet 
+              under ett tak får du trygg og effektiv gjennomføring av hele prosjektet.
             </p>
-
+            
             <div class="hero-buttons">
-              <a href="#projects" class="btn btn-outline"
-                >Se våre tidligere prosjekt</a
-              >
-              <a href="#contact" class="btn btn-primary">Kontakt oss</a>
+              <a href="#projects" class="btn btn-primary">Se våre tidligere prosjekter</a>
+              <a href="#contact" class="btn btn-outline">Kontakt oss</a>
             </div>
           </div>
           <div class="hero-image">
-            <picture>
-              <source
-                srcset="/public/images/home-image.webp"
-                type="image/webp"
-              />
-              <img
-                src="/public/images/home-image.jpeg"
-                alt="Construction project showcase"
-                width="1200"
-                height="800"
-                loading="eager"
-              />
-            </picture>
+            <img
+              src="/public/images/home-image.jpeg"
+              alt="Construction project showcase"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+      <div class="container">
+        <h2 class="section-title">Hva vi tilbyr</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <h3>Kjøkkenrenovering</h3>
+            <p>Skreddersydde kjøkkenløsninger i treverk og moderne materialer.</p>
+          </div>
+          <div class="service-card">
+            <h3>Bad</h3>
+            <p>Nye baderom og oppussing – fra planlegging til ferdig resultat.</p>
+          </div>
+          <div class="service-card">
+            <h3>Tilbygg</h3>
+            <p>Utvidelser og påbygg for bolig og næringsbygg.</p>
+          </div>
+          <div class="service-card">
+            <h3>Tak</h3>
+            <p>Takarbeid, skifertak og vedlikehold av tak.</p>
+          </div>
+          <div class="service-card">
+            <h3>Hytterenovering</h3>
+            <p>Total oppgradering av hytte med moderne uttrykk.</p>
+          </div>
+          <div class="service-card">
+            <h3>Kommersielle prosjekter</h3>
+            <p>Renovering og bygg for næringslivet – salonger, kontorer og mer.</p>
           </div>
         </div>
       </div>
@@ -103,34 +95,26 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
       <div class="container">
-        <h2 class="section-title">
-          Utforsk bildegalleriet med våre tidligere prosjekter
-        </h2>
+        <h2 class="section-title">Utforsk bildegalleriet med våre tidligere prosjekter</h2>
 
         <div class="projects-carousel">
           <button class="carousel-btn prev" aria-label="Forrige">
             &#8249;
           </button>
-
+          
           <div class="carousel-track-wrapper">
-            <div
-              class="carousel-track"
-              role="region"
-              aria-label="Prosjektgalleri"
-            >
+            <div class="carousel-track">
               <!-- Project 1 -->
               <div class="project-card">
                 <div class="project-image">
                   <img
                     src="/public/images/kjokken-image.jpeg"
-                    alt="Moderne kjøkken med skreddersydd treverk fra Gjøvik ByggService"
+                    alt="Kitchen renovation"
                   />
                 </div>
                 <div class="project-info">
                   <h3 class="project-title">Totalrenovert kjøkken</h3>
-                  <a href="#" class="project-link"
-                    >Skreddersydd kjøkken i naturlig treverk</a
-                  >
+                  <a href="#" class="project-link">Skreddersydd kjøkken i naturlig treverk</a>
                 </div>
               </div>
 
@@ -139,14 +123,12 @@
                 <div class="project-image">
                   <img
                     src="/public/images/hytte-image.png"
-                    alt="Hytte renovasjon utført av Gjøvik ByggService"
+                    alt="House renovation"
                   />
                 </div>
                 <div class="project-info">
                   <h3 class="project-title">Hytterenovering</h3>
-                  <a href="#" class="project-link"
-                    >Total oppgradering av hytte med moderne uttrykk</a
-                  >
+                  <a href="#" class="project-link">Total oppgradering av hytte med moderne uttrykk</a>
                 </div>
               </div>
 
@@ -155,7 +137,7 @@
                 <div class="project-image">
                   <img
                     src="/public/images/salon-image.jpeg"
-                    alt="Frisør salong interiør design by Gjøvik ByggService"
+                    alt="Salon renovation"
                   />
                 </div>
                 <div class="project-info">
@@ -171,8 +153,7 @@
                 <div class="project-image">
                   <img
                     src="/public/images/house-image.JPG"
-                    alt="Hus renovasjon i moderne utseende av utført Gjøvik ByggService"
-                    loading="lazy"
+                    alt="House renovation"
                   />
                 </div>
                 <div class="project-info">
@@ -182,13 +163,12 @@
                   >
                 </div>
               </div>
-              <!-- Project 5 -->
+                <!-- Project 5 -->
               <div class="project-card">
                 <div class="project-image">
                   <img
                     src="/public/images/bath-modern.JPG"
-                    alt="Baderomsprosjekt full renovasjon"
-                    loading="lazy"
+                    alt="Bathroom renovation"
                   />
                 </div>
                 <div class="project-info">
@@ -203,8 +183,7 @@
                 <div class="project-image">
                   <img
                     src="/public/images/bath-reno.JPG"
-                    alt="Baderom renovasjon full renovasjon"
-                    loading="lazy"
+                    alt="Bathroom renovation"
                   />
                 </div>
                 <div class="project-info">
@@ -214,13 +193,12 @@
                   >
                 </div>
               </div>
-              <!-- Project 7 -->
-              <div class="project-card">
+               <!-- Project 7 -->
+               <div class="project-card">
                 <div class="project-image">
                   <img
                     src="/public/images/roof.JPG"
-                    alt="Tak bytte til Skiferstein som takstein"
-                    loading="lazy"
+                    alt="Roof renovation"
                   />
                 </div>
                 <div class="project-info">
@@ -230,13 +208,12 @@
                   >
                 </div>
               </div>
-              <!-- Project 8 -->
-              <div class="project-card">
+               <!-- Project 8 -->
+               <div class="project-card">
                 <div class="project-image">
                   <img
                     src="/public/images/house-reno.JPG"
-                    alt="Hus renovasjon"
-                    loading="lazy"
+                    alt="House renovation"
                   />
                 </div>
                 <div class="project-info">
@@ -246,13 +223,12 @@
                   >
                 </div>
               </div>
-              <!-- Project 9 -->
-              <div class="project-card">
+               <!-- Project 9 -->
+               <div class="project-card">
                 <div class="project-image">
                   <img
                     src="/public/images/kitchen-reno.JPG"
-                    alt="Full kjøkken renovasjon i moderne design"
-                    loading="lazy"
+                    alt="Kitchen renovation"
                   />
                 </div>
                 <div class="project-info">
@@ -264,18 +240,33 @@
               </div>
             </div>
           </div>
-
+          
           <button class="carousel-btn next" aria-label="Neste">&#8250;</button>
         </div>
-
+        
         <!-- Mobile button container - only visible on mobile -->
         <div class="carousel-controls-mobile">
-          <button class="carousel-btn-mobile prev" aria-label="Forrige">
-            &#8249;
-          </button>
-          <button class="carousel-btn-mobile next" aria-label="Neste">
-            &#8250;
-          </button>
+          <button class="carousel-btn-mobile prev" aria-label="Forrige">&#8249;</button>
+          <button class="carousel-btn-mobile next" aria-label="Neste">&#8250;</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <h2 class="section-title">Om oss</h2>
+        <div class="about-content">
+          <p class="about-text">
+            Gjøvik ByggService AS er en totalentreprenør med base i Gjøvik. Vi leverer komplette løsninger 
+            fra planlegging til ferdig resultat, med alle faggrupper samlet under ett tak. 
+            Som mesterbedrift og sentralt godkjent foretak sikrer vi fagmessig kvalitet og trygg gjennomføring 
+            av prosjekter store som små.
+          </p>
+          <p class="about-text">
+            Vi tar på oss alt fra kjøkken- og baderomsrenovering til tilbygg, takarbeid og hytteprosjekter. 
+            Ta gjerne kontakt for en uforpliktende prat om ditt neste prosjekt.
+          </p>
         </div>
       </div>
     </section>
@@ -286,33 +277,42 @@
         <h2 class="section-title">Kunde tilbakemeldinger</h2>
 
         <div class="testimonials-grid">
-          <!-- Testimonial 1 -->
+          <!-- Testimonial 1 - Replace "Kunde" with real name when you have permission -->
           <div class="testimonial-card">
-            <div class="quote-icon">"</div>
+            <div class="testimonial-header">
+              <div class="testimonial-avatar" aria-hidden="true">K</div>
+              <div class="quote-icon">"</div>
+            </div>
             <p class="testimonial-text">
               Gjøvik Byggservice utfører fagmessig arbeid. Bestill GBS!
             </p>
-            <p class="testimonial-author">Facebook tilbakemelding fra kunde</p>
+            <p class="testimonial-author"><span class="testimonial-name">— Kunde</span> · Facebook</p>
           </div>
 
           <!-- Testimonial 2 -->
           <div class="testimonial-card">
-            <div class="quote-icon">"</div>
+            <div class="testimonial-header">
+              <div class="testimonial-avatar" aria-hidden="true">K</div>
+              <div class="quote-icon">"</div>
+            </div>
             <p class="testimonial-text">
               Du får tett og god oppfølging hele veien, opptatt av at kunden
               skal bli fornøyd. Ærlig, redelig og ordentlig - gir gode råd.
               Flinke og dedikerte håndverkere!
             </p>
-            <p class="testimonial-author">Facebook tilbakemelding fra kunde</p>
+            <p class="testimonial-author"><span class="testimonial-name">— Kunde</span> · Facebook</p>
           </div>
 
           <!-- Testimonial 3 -->
           <div class="testimonial-card">
-            <div class="quote-icon">"</div>
+            <div class="testimonial-header">
+              <div class="testimonial-avatar" aria-hidden="true">K</div>
+              <div class="quote-icon">"</div>
+            </div>
             <p class="testimonial-text">
               Bra service, rask og profesjonelt utført jobb, anbefaler
             </p>
-            <p class="testimonial-author">Facebook tilbakemelding fra kunde</p>
+            <p class="testimonial-author"><span class="testimonial-name">— Kunde</span> · Facebook</p>
           </div>
         </div>
       </div>
@@ -324,7 +324,7 @@
         <div class="contact-content">
           <!-- Contact Form -->
           <div class="contact-form-wrapper">
-            <h2 class="section-title">Kontaktskjema</h2>
+            <h2 class="section-title">Kontakt skjema</h2>
             <form class="contact-form" id="contactForm">
               <input type="text" name="name" placeholder="Navn" required />
               <input
@@ -334,13 +334,7 @@
                 required
               />
               <input type="email" name="email" placeholder="Email" required />
-              <input
-                type="text"
-                name="website"
-                style="display: none"
-                tabindex="-1"
-                autocomplete="off"
-              />
+
               <label for="projectType">Prosjekt</label>
               <div class="select-wrapper">
                 <select name="projectType" id="projectType" required>
@@ -360,8 +354,7 @@
                   aria-live="polite"
                   aria-atomic="true"
                   role="status"
-                  >0/100 ord</span
-                >
+                >0/100 ord</span>
               </div>
 
               <textarea
@@ -375,9 +368,7 @@
               ></textarea>
 
               <div class="form-actions">
-                <button type="submit" class="btn btn-primary btn-submit">
-                  Send
-                </button>
+                <button type="submit" class="btn btn-primary btn-submit">Send</button>
               </div>
             </form>
           </div>
@@ -412,21 +403,53 @@
               </dl>
             </div>
           </div>
+          <!-- Google Maps -->
+          <div class="contact-map">
+            <h2 class="section-title" id="map-heading">Finn oss</h2>
+            <div class="map-wrapper" aria-labelledby="map-heading">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1948.0760437815443!2d10.634236877235308!3d60.773598594588535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4641d0824d3a5fa9%3A0x5315ea43f60fc9e0!2sDamsletta%2023%2C%202827%20Hunndalen!5e0!3m2!1sen!2sno!4v1773307665351!5m2!1sen!2sno" 
+              width="100%"
+                height="250"
+                style="border:0;"
+                allowfullscreen=""
+                allowfullscreen=""
+                allowfullscreen=""
+                allowfullscreen=""
+                allowfullscreen=""
+                allowfullscreen=""
+                allowfullscreen=""
+                allowfullscreen=""
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Kart til Gjøvik ByggService, Damsletta 23, Gjøvik"
+              ></iframe>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-logo">
-            <img
-              src="public/images/logo.png"
-              alt="GBS Gjøvik ByggService AS"
-              class="logo-image"
-            />
-          </div>
+   <!-- Footer -->
+   <footer class="footer">
+    <div class="container">
+      <div class="footer-trust">
+        <div class="trust-badge">
+          <img src="public/images/mesterbedrift-logo.png" alt="Mesterbedrift" />
+        </div>
+        <div class="trust-badge">
+          <img src="public/images/sentralt-godkjent-logo.png" alt="Sentralt godkjent" />
+        </div>
+        <span class="trust-years">15+ års erfaring</span>
+      </div>
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img
+            src="public/images/logo.png"
+            alt="GBS Gjøvik ByggService AS"
+            class="logo-image"
+          />
+        </div>
 
           <div class="footer-address">
             <h3>Adresse</h3>
@@ -447,7 +470,7 @@
           <div class="footer-social">
             <h3>Sosiale medier</h3>
             <div class="social-icons">
-              <a href="https://www.facebook.com/gbs.gjovikbyggservice" aria-label="Facebook">
+              <a href="#" aria-label="Facebook">
                 <svg
                   width="24"
                   height="24"
@@ -459,7 +482,7 @@
                   />
                 </svg>
               </a>
-              <a href="https://www.instagram.com/gjovikbyggservice/" aria-label="Instagram">
+              <a href="#" aria-label="Instagram">
                 <svg
                   width="24"
                   height="24"
@@ -477,9 +500,8 @@
       </div>
     </footer>
 
-    <script src="public/javascript/main.js" defer></script>
-    <script src="public/javascript/navigation.js" defer></script>
-    <script src="public/javascript/gallery.js" defer></script>
-    <script src="public/javascript/forms.js" defer></script>
+    <script src="public/javascript/main.js"></script>
+    <script src="public/javascript/gallery.js"></script>
+    <script src="public/javascript/forms.js"></script>
   </body>
 </html>

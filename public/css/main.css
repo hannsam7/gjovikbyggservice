@@ -19,7 +19,7 @@ html, body {
     top: 0;
     left: 0;
     right: 0;
-    background-color: rgba(36, 40, 37, 0.95);
+    background-color: rgba(36, 40, 37, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     padding: 0;
@@ -31,7 +31,6 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--spacing-sm) var(--spacing-lg);
 }
 
 .logo-image {
@@ -47,7 +46,7 @@ html, body {
 }
 
 .nav-links a {
-    color: #ffffff;
+    color: #f0f0f0;
     font-weight: var(--font-weight-medium);
     transition: color var(--transition-fast);
     font-size: 1.3em;
@@ -57,37 +56,9 @@ html, body {
     color: var(--color-gold);
 }
 
-/* Hamburger menu (hidden on desktop) */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    z-index: 1001;
-}
-
-.hamburger span {
-    display: block;
-    width: 28px;
-    height: 3px;
-    background-color: var(--color-gold);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-
-.hamburger.active span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-}
-
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+.nav-links a.active {
+    color: var(--color-gold);
+    font-weight: var(--font-weight-semibold);
 }
 
 /* Hero Section */
@@ -95,7 +66,7 @@ html, body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 110px;
+    padding-top: 140px;
 }
 
 .hero .container {
@@ -106,7 +77,7 @@ html, body {
 
 .hero-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 0.9fr;
     gap: var(--spacing-3xl);
     align-items: center;
     width: 100%;
@@ -127,7 +98,7 @@ html, body {
     border-radius: 9999px;
     border: 2px solid transparent;
     font-weight: var(--font-weight-semibold);
-    letter-spacing: 0.3px;
+    letter-spacing: 0.2px;
     text-decoration: none;
     transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
 }
@@ -187,20 +158,6 @@ html, body {
     flex-wrap: wrap;
 }
 
-.hero-buttons .btn {
-    letter-spacing: 0.3px;
-}
-
-.hero-buttons .btn-primary {
-    /* make Kontakt primary: swap classes in HTML */
-    padding: 0.7rem 1.1rem;
-}
-
-.hero-buttons .btn-outline {
-    padding: 0.7rem 1.1rem;
-}
-
-
 .hero-image {
     border-radius: 25px;
     overflow: hidden;
@@ -209,7 +166,6 @@ html, body {
     margin-left: auto;   /* push image to the right */
     margin-right: 0;     /* ensure no auto-right */
     justify-self: end;
-    position: relative;
 }
 
 .hero-image img {
@@ -219,22 +175,74 @@ html, body {
     object-fit: cover;
 }
 
-.hero-image::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(36,40,37,0.35) 0%, rgba(36,40,37,0) 40%);
-    pointer-events: none;
+/* Services Section */
+.services {
+    padding: var(--spacing-3xl) 0;
+    background-color: var(--color-dark-secondary);
 }
 
-.section-title {
-    font-size: var(--font-size-h2);
-    margin: 0 auto var(--spacing-2xl);
+.services .section-title {
     text-align: center;
+    margin-bottom: var(--spacing-xl);
 }
-.hero-description {
-    max-width: 70ch; /* readable width */
-    line-height: 1.8; /* slightly more breathing room */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.service-card {
+    background-color: rgba(36, 40, 37, 0.6);
+    border: 1px solid rgba(200, 154, 46, 0.2);
+    border-radius: var(--border-radius-large);
+    padding: var(--spacing-xl);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.service-card:hover {
+    border-color: rgba(200, 154, 46, 0.4);
+    box-shadow: var(--shadow-small);
+}
+
+.service-card h3 {
+    color: var(--color-gold);
+    font-size: var(--font-size-large);
+    margin-bottom: var(--spacing-sm);
+}
+
+.service-card p {
+    color: var(--color-gray-light);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* About Section */
+.about {
+    padding: var(--spacing-3xl) 0;
+    background-color: var(--color-dark-bg);
+}
+
+.about .section-title {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.about-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.about-text {
+    color: var(--color-gray-light);
+    font-size: var(--font-size-large);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-md);
+}
+
+.about-text:last-child {
+    margin-bottom: 0;
 }
 
 /* Projects Section */
@@ -246,11 +254,6 @@ html, body {
 .projects .container {
     padding-left: 80px;
     padding-right: 80px;
-    padding-bottom: calc(var(--spacing-xl) + 20px); /* more bottom space */
-    border-radius: var(--border-radius-large);
-    box-shadow: var(--shadow-large);
-    overflow: hidden;
-    background: rgba(0,0,0,0.05);
 }
 
 /* Hide mobile controls on desktop */
@@ -287,54 +290,18 @@ html, body {
 }
 
 .project-card {
-    position: relative;
     scroll-snap-align: start;
     min-width: 0;
-    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    will-change: transform;
-}
-
-.project-image {
-    position: relative;
-}
-.project-image::after {
-    content: "";
-    position: absolute;
-    inset: auto 0 0 0;
-    height: 35%;
-    background: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0));
-    pointer-events: none;
-}
-
-
-.project-info {
-    position: absolute;
-    bottom: 1.25rem; 
-    left: 0.75rem;
-    right: 0.75rem;
-    z-index: 2;
-}
-
-.project-title, .project-link {
-    color: #fff;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.35);
-}
-.project-link {
-    display: inline-block;
-    margin-top: 0.25rem;
-    color: var(--color-gold);
 }
 
 /* Base image size */
 .project-card .project-image {
-    position: relative; 
     width: 100%;
-    height: 420px;
+    height: 400px;
     border-radius: var(--border-radius);
     overflow: hidden;
     background: #1f1f1f;
 }
-
 
 .project-card .project-image img, .hero-image img {
     max-width: 100%;
@@ -346,7 +313,7 @@ html, body {
 
 /* Make the last 4 cards (square images) larger */
 .carousel-track .project-card:nth-last-child(-n+4) .project-image {
-    height: 480px;
+    height: 450px;
 }
 
 .projects .section-title {
@@ -403,6 +370,71 @@ html, body {
     gap: var(--spacing-xl);
 }
 
+.testimonial-card {
+    background-color: rgba(36, 40, 37, 0.6);
+    border: 1px solid rgba(200, 154, 46, 0.25);
+    border-radius: var(--border-radius-large);
+    padding: var(--spacing-xl);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.testimonial-card:hover {
+    border-color: rgba(200, 154, 46, 0.4);
+    box-shadow: var(--shadow-small);
+}
+
+.testimonial-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.testimonial-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(200, 154, 46, 0.3);
+    color: var(--color-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-weight-semibold);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.testimonial-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonial-card .quote-icon {
+    font-size: 2.5rem;
+    color: var(--color-gold);
+    opacity: 0.6;
+    line-height: 1;
+}
+
+.testimonial-card .testimonial-text {
+    color: var(--color-gray-light);
+    font-size: var(--font-size-large);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+}
+
+.testimonial-card .testimonial-author {
+    color: var(--color-gray-medium);
+    font-size: 0.9rem;
+}
+
+.testimonial-card .testimonial-name {
+    color: var(--color-gold);
+    font-weight: var(--font-weight-medium);
+}
+
 /* Contact Section */
 .contact {
     padding: var(--spacing-3xl) 0;
@@ -411,8 +443,22 @@ html, body {
 
 .contact-content {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: var(--spacing-3xl);
+}
+
+.contact-map {
+    grid-column: 1 / -1;
+}
+
+.map-wrapper {
+    border-radius: var(--border-radius-large);
+    overflow: hidden;
+    box-shadow: var(--shadow-medium);
+}
+
+.map-wrapper iframe {
+    display: block;
 }
 
 .contact-form {
@@ -590,6 +636,40 @@ html, body {
     border-top: 1px solid var(--color-gray-dark);
 }
 
+.footer-trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--color-gray-dark);
+}
+
+.trust-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm);
+    background: transparent;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.trust-badge:hover img {
+    opacity: 0.9;
+}
+
+.trust-badge img {
+    max-height: 120px;
+    max-width: 180px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    /* Remove white background from logos – blends with dark footer */
+    mix-blend-mode: multiply;
+}
+
 .footer-content {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
@@ -635,7 +715,7 @@ html, body {
 }
 
 .social-icons a {
-    color: #ffffff;
+    color: #f0f0f0;
     transition: color var(--transition-fast);
 }
 
@@ -692,6 +772,14 @@ html, body {
         grid-template-columns: 1fr;
         gap: var(--spacing-xl);
     }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about {
+        padding: var(--spacing-xl) 0;
+    }
     
     .projects .container {
         padding-left: 70px;
@@ -729,162 +817,106 @@ html, body {
         --spacing-3xl: 3rem;
     }
 
-    .container {
-        padding: 0 var(--spacing-md);
-    }
-
-    /* Mobile Navigation with Hamburger Menu */
     .navbar .container {
-        padding: 0.75rem 1rem;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm) var(--spacing-md);
     }
 
     .logo-image {
-        height: 50px;
-        width: auto;
+        max-width: 100%;
+        height: 60px;
     }
 
-    /* Show hamburger on mobile */
-    .hamburger {
-        display: flex;
-    }
-
-    /* Hide nav links by default on mobile */
     .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        height: 100vh;
-        width: 70%;
-        max-width: 300px;
-        background-color: rgba(36, 40, 37, 0.98);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        gap: 0;
-        padding: 80px 0 2rem 0;
-        transition: right 0.3s ease;
-        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
-        overflow-y: auto;
+        gap: var(--spacing-md);
+        font-size: 0.875rem;
+        flex-wrap: wrap;
+        justify-content: center;
     }
-
-    .nav-links.active {
-        right: 0;
-    }
-
-    .nav-links li {
-        width: 100%;
-        border-bottom: 1px solid rgba(200, 154, 46, 0.1);
-    }
-
+    
     .nav-links a {
-        display: block;
-        padding: 1.25rem 2rem;
-        font-size: 1.1rem;
-        width: 100%;
-        transition: all 0.2s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-        background-color: rgba(200, 154, 46, 0.15);
-        padding-left: 2.5rem;
-    }
-
-    /* Overlay when menu is open */
-    .nav-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.7);
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-        z-index: 999;
-    }
-
-    .nav-overlay.active {
-        opacity: 1;
-        visibility: visible;
+        font-size: 1rem;
+        padding: 0.25rem 0.5rem;
     }
 
     .hero {
-        padding-top: 90px;
+        padding-top: 180px;
         min-height: auto;
-        padding-bottom: var(--spacing-2xl);
+        padding-bottom: var(--spacing-xl);
     }
     
     .hero .container {
         padding: 0 var(--spacing-lg);
     }
     
-    .hero-content {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-    
     .hero-text {
         padding-right: 0;
         font-size: 1em;
-        text-align: center;
     }
     
     .hero-text h1 {
         margin-left: 0;
-        font-size: 1.85rem;
-        line-height: 1.3;
-        margin-bottom: var(--spacing-md);
     }
     
     .hero-description {
         margin-left: 0;
-        font-size: 1.05rem;
+        font-size: 1rem;
         margin-bottom: var(--spacing-lg);
-        text-align: center;
-        line-height: 1.6;
-        max-width: 100%;
     }
 
     .hero-buttons {
         flex-direction: column;
         width: 100%;
         margin-left: 0;
-        gap: 0.75rem;
     }
     
-    /* Hide hero image on mobile for faster loading and better mobile experience */
     .hero-image {
-        display: none;
+        border-radius: var(--border-radius-large);
+        margin-right: 0;
+    }
+    
+    .hero-image img {
+        height: auto;
     }
     
     .hero-buttons .btn {
         width: 100%;
         justify-content: center;
-        padding: 0.875rem 1.25rem;
-        font-size: 1.05rem;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
     }
 
     .projects,
     .testimonials,
-    .contact {
+    .contact,
+    .services,
+    .about {
         padding: var(--spacing-xl) 0;
+    }
+
+    .footer-trust {
+        flex-direction: column;
+        gap: var(--spacing-xl);
+        padding-bottom: var(--spacing-lg);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .trust-badge {
+        min-height: 50px;
+        min-width: 100px;
+    }
+
+    .trust-badge img {
+        max-height: 40px;
+        max-width: 120px;
     }
     
     .projects .container {
         padding-left: var(--spacing-lg);
         padding-right: var(--spacing-lg);
-        padding-bottom: calc(var(--spacing-lg) + 16px); 
     }
 
-    .projects .section-title {
-        font-size: 1.4rem;
-        padding: 0 var(--spacing-sm);
-        line-height: 1.3;
-    }
-    
     .testimonials-grid {
         grid-template-columns: 1fr;
         gap: var(--spacing-md);
@@ -931,11 +963,11 @@ html, body {
         background: var(--color-gold);
         color: var(--color-dark-bg);
         border-radius: 999px;
-        width: 44px;
-        height: 44px;
+        width: 40px;
+        height: 40px;
         display: grid;
         place-items: center;
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         box-shadow: var(--shadow-small);
         transition: transform var(--transition-fast), background var(--transition-fast), opacity var(--transition-fast);
         cursor: pointer;
@@ -945,10 +977,6 @@ html, body {
     .carousel-btn-mobile:hover {
         background: var(--color-gold-hover);
         transform: scale(1.05);
-    }
-    
-    .carousel-btn-mobile:active {
-        transform: scale(0.95);
     }
     
     .carousel-btn-mobile:disabled {
@@ -962,11 +990,11 @@ html, body {
     }
     
     .project-card .project-image {
-        height: 280px;
+        height: 240px;
     }
     
     .carousel-track .project-card:nth-last-child(-n+4) .project-image {
-        height: 320px;
+        height: 280px;
     }
     
     /* Form improvements for mobile */
@@ -974,24 +1002,24 @@ html, body {
     .contact-form select,
     .contact-form textarea {
         font-size: 16px; /* Prevents zoom on iOS */
-        padding: 0.875rem 1rem;
+        padding: 0.75rem 0.875rem;
     }
     
     .contact-form .btn-submit {
         font-size: 1.1rem;
-        padding: 1rem 1.5rem;
+        padding: 0.875rem 1.25rem;
         width: 100%;
     }
     
     .opening-hours-list dd {
-        margin-left: 85px;
+        margin-left: 80px;
     }
 }
 
 @media (max-width: 480px) {
     :root {
         --font-size-hero: 1.75rem;
-        --font-size-h2: 1.35rem;
+        --font-size-h2: 1.25rem;
         --spacing-lg: 1rem;
         --spacing-xl: 1.5rem;
         --spacing-3xl: 2rem;
@@ -1000,90 +1028,50 @@ html, body {
     .container {
         padding: 0 var(--spacing-md);
     }
-
-    .navbar .container {
-        padding: 0.65rem 0.75rem;
-    }
-
-    .logo-image {
-        height: 45px;
-    }
     
     .projects .container {
         padding-left: var(--spacing-md);
         padding-right: var(--spacing-md);
     }
     
-    .hero {
-        padding-top: 80px;
-    }
-    
     .hero-text h1 {
         font-size: 1.5rem;
         margin-bottom: var(--spacing-md);
-        padding: 0 0.5rem;
-    }
-    
-    .hero-description {
-        font-size: 0.95rem;
-        padding: 0 0.5rem;
     }
     
     .section-title {
-        font-size: 1.25rem;
-        margin-bottom: var(--spacing-lg);
-        padding: 0 0.5rem;
-        word-wrap: break-word;
-        hyphens: auto;
+        font-size: 1.5rem;
     }
     
     .carousel-track {
-        grid-auto-columns: 92%;
-        gap: var(--spacing-sm);
+        grid-auto-columns: 90%;
     }
     
     .project-card .project-image {
-        height: 240px;
+        height: 200px;
     }
     
     .carousel-track .project-card:nth-last-child(-n+4) .project-image {
-        height: 280px;
-    }
-    
-    .carousel-btn-mobile {
-        width: 40px;
-        height: 40px;
-        font-size: 1.4rem;
+        height: 240px;
     }
     
     .opening-hours-list dd {
-        margin-left: 75px;
-        font-size: 0.95rem;
+        margin-left: 70px;
+        font-size: 0.9rem;
     }
     
     .opening-hours-list dt {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
     }
     
     .hours-box {
         padding: var(--spacing-md);
         font-size: 1rem;
     }
-    
-    .testimonial-card {
-        padding: var(--spacing-md);
-    }
-    
-    .contact-form input,
-    .contact-form select,
-    .contact-form textarea {
-        font-size: 16px;
-        padding: 0.75rem 0.875rem;
-    }
 }
 
-/* Additional overflow prevention */
-* {
+/* Additional overflow prevention - avoid max-width on all elements (breaks flex/grid) */
+html, body {
     max-width: 100%;
 }
 

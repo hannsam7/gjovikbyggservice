@@ -71,8 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    // Observe project cards and testimonial cards
-    const fadeCards = document.querySelectorAll('.project-card, .testimonial-card');
+    // Observe project cards, service cards, and testimonial cards
+    const fadeCards = document.querySelectorAll('.project-card, .service-card, .testimonial-card');
     fadeCards.forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
