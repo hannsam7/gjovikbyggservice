@@ -3,10 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Gjøvik ByggService – totalentreprenør i Gjøvik. Vi leverer kjøkkenrenovering, bad, tilbygg, tak og hytterenovering. Mesterbedrift og sentralt godkjent." />
-    <title>Gjøvik ByggService – Totalentreprenør i Gjøvik | Kjøkken, bad, tilbygg</title>
+    <title>Gjøvik ByggService – Totalentreprenør i Gjøvik | Kjøkken, bad, tilbygg, tak</title>
+    <meta name="description" content="Totalentreprenør i Gjøvik. Kjøkkenrenovering, bad, tilbygg, tak og hytterenovering. Mesterbedrift og sentralt godkjent. 15+ års erfaring. Ring 922 34 450 for uforpliktende tilbud." />
+    <meta name="keywords" content="totalentreprenør Gjøvik, kjøkkenrenovering Gjøvik, baderomsrenovering Gjøvik, tilbygg Gjøvik, takarbeid Gjøvik, hytterenovering, mesterbedrift, byggservice" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://gjovik-byggservice.no/" />
+    <link rel="icon" type="image/png" href="/public/images/logo.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/public/images/logo.png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gjovik-byggservice.no/" />
+    <meta property="og:title" content="Gjøvik ByggService – Totalentreprenør i Gjøvik" />
+    <meta property="og:description" content="Kjøkken, bad, tilbygg, tak og hytterenovering. Mesterbedrift og sentralt godkjent. 15+ års erfaring." />
+    <meta property="og:image" content="https://gjovik-byggservice.no/public/images/home-image.jpeg" />
+    <meta property="og:locale" content="nb_NO" />
+    <meta property="og:site_name" content="Gjøvik ByggService" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gjøvik ByggService – Totalentreprenør i Gjøvik" />
+    <meta name="twitter:description" content="Kjøkken, bad, tilbygg, tak og hytterenovering. Mesterbedrift og sentralt godkjent." />
+
     <link rel="stylesheet" href="/public/css/variable.css" />
-  <link rel="stylesheet" href="/public/css/main.css" />
+    <link rel="stylesheet" href="/public/css/main.css" />
+
+    <!-- LocalBusiness structured data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Gjøvik ByggService AS",
+      "image": "https://gjovik-byggservice.no/public/images/logo.png",
+      "description": "Totalentreprenør i Gjøvik. Kjøkkenrenovering, bad, tilbygg, tak og hytterenovering. Mesterbedrift og sentralt godkjent.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Damsletta 23",
+        "addressLocality": "Gjøvik",
+        "postalCode": "2827"
+      },
+      "telephone": "+4792234450",
+      "email": "post@gjovik-byggservice.no",
+      "openingHoursSpecification": [
+        {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "07:00", "closes": "16:00"},
+        {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "07:00", "closes": "13:00"}
+      ],
+      "areaServed": "Gjøvik",
+      "priceRange": "$$",
+      "url": "https://gjovik-byggservice.no"
+    }
+    </script>
   </head>
   <body>
     <!-- Navigation -->
@@ -50,10 +96,13 @@
             </div>
           </div>
           <div class="hero-image">
-            <img
-              src="/public/images/home-image.jpeg"
-              alt="Construction project showcase"
-            />
+            <picture>
+              <source srcset="/public/images/home-image.webp" type="image/webp" />
+              <img
+                src="/public/images/home-image.jpeg"
+                alt="Gjøvik ByggService – byggprosjekt og renovering"
+              />
+            </picture>
           </div>
         </div>
       </div>
@@ -109,7 +158,8 @@
                 <div class="project-image">
                   <img
                     src="/public/images/kjokken-image.jpeg"
-                    alt="Kitchen renovation"
+                    alt="Kjøkkenrenovering Gjøvik – skreddersydd kjøkken i treverk"
+                    loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -123,7 +173,8 @@
                 <div class="project-image">
                   <img
                     src="/public/images/hytte-image.png"
-                    alt="House renovation"
+                    alt="Hytterenovering – total oppgradering av hytte"
+                    loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -137,7 +188,8 @@
                 <div class="project-image">
                   <img
                     src="/public/images/salon-image.jpeg"
-                    alt="Salon renovation"
+                    alt="Salongrenovering – frisørsalong i Gjøvik"
+                    loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -153,7 +205,8 @@
                 <div class="project-image">
                   <img
                     src="/public/images/house-image.JPG"
-                    alt="House renovation"
+                    alt="Boligrenovering Gjøvik – oppussing i klassisk stil"
+                    loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -168,7 +221,8 @@
                 <div class="project-image">
                   <img
                     src="/public/images/bath-modern.JPG"
-                    alt="Bathroom renovation"
+                    alt="Baderomsrenovering – moderne bad med rene linjer"
+                    loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -183,7 +237,8 @@
                 <div class="project-image">
                   <img
                     src="/public/images/bath-reno.JPG"
-                    alt="Bathroom renovation"
+                    alt="Baderomsrenovering – elegant klassisk design"
+                    loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -198,7 +253,8 @@
                 <div class="project-image">
                   <img
                     src="/public/images/roof.JPG"
-                    alt="Roof renovation"
+                    alt="Takarbeid Gjøvik – skifertak og takrenovering"
+                    loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -213,7 +269,8 @@
                 <div class="project-image">
                   <img
                     src="/public/images/house-reno.JPG"
-                    alt="House renovation"
+                    alt="Boligrenovering – totalrenovering i treverk"
+                    loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -228,7 +285,8 @@
                 <div class="project-image">
                   <img
                     src="/public/images/kitchen-reno.JPG"
-                    alt="Kitchen renovation"
+                    alt="Kjøkkenrenovering – moderne kjøkken med stilrent design"
+                    loading="lazy"
                   />
                 </div>
                 <div class="project-info">
@@ -412,14 +470,6 @@
                 height="250"
                 style="border:0;"
                 allowfullscreen=""
-                allowfullscreen=""
-                allowfullscreen=""
-                allowfullscreen=""
-                allowfullscreen=""
-                allowfullscreen=""
-                allowfullscreen=""
-                allowfullscreen=""
-                allowfullscreen=""
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
                 title="Kart til Gjøvik ByggService, Damsletta 23, Gjøvik"
@@ -435,10 +485,10 @@
     <div class="container">
       <div class="footer-trust">
         <div class="trust-badge">
-          <img src="/public/images/mesterbedrift-logo.png" alt="Mesterbedrift" />
+          <img src="/public/images/mesterbedrift-logo.png" alt="Mesterbedrift – godkjent mesterbedrift i byggbransjen" loading="lazy" />
         </div>
         <div class="trust-badge">
-          <img src="/public/images/sentralt-godkjent-logo.png" alt="Sentralt godkjent" />
+          <img src="/public/images/sentralt-godkjent-logo.png" alt="Sentralt godkjent – offisiell godkjenning" loading="lazy" />
         </div>
         <span class="trust-years">15+ års erfaring</span>
       </div>
@@ -448,6 +498,7 @@
             src="/public/images/logo.png"
             alt="GBS Gjøvik ByggService AS"
             class="logo-image"
+            loading="lazy"
           />
         </div>
 
@@ -470,7 +521,7 @@
           <div class="footer-social">
             <h3>Sosiale medier</h3>
             <div class="social-icons">
-              <a href="#" aria-label="Facebook">
+              <a href="https://www.facebook.com/gbs.gjovikbyggservice" target="_blank" rel="noopener noreferrer" aria-label="Gjøvik ByggService på Facebook">
                 <svg
                   width="24"
                   height="24"
@@ -482,7 +533,7 @@
                   />
                 </svg>
               </a>
-              <a href="#" aria-label="Instagram">
+              <a href="https://www.instagram.com/gjovikbyggservice/" target="_blank" rel="noopener noreferrer" aria-label="Gjøvik ByggService på Instagram">
                 <svg
                   width="24"
                   height="24"

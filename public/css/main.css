@@ -651,23 +651,32 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-sm);
-    background: transparent;
+    /* Light background so black/dark logos are visible against dark footer */
+    background: #ffffff;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-small);
     transition: opacity var(--transition-fast), transform var(--transition-fast);
 }
 
-.trust-badge:hover img {
-    opacity: 0.9;
+.trust-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
 }
 
 .trust-badge img {
-    max-height: 120px;
-    max-width: 180px;
+    /* Equal size for both badges – consistent visual weight */
+    height: 70px;
     width: auto;
-    height: auto;
+    max-width: 140px;
     object-fit: contain;
-    /* Remove white background from logos – blends with dark footer */
-    mix-blend-mode: multiply;
+    display: block;
+}
+
+.trust-years {
+    color: var(--color-gold);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-large);
 }
 
 .footer-content {
@@ -903,13 +912,12 @@ html, body {
     }
 
     .trust-badge {
-        min-height: 50px;
-        min-width: 100px;
+        padding: var(--spacing-sm) var(--spacing-md);
     }
 
     .trust-badge img {
-        max-height: 40px;
-        max-width: 120px;
+        height: 50px;
+        max-width: 110px;
     }
     
     .projects .container {
